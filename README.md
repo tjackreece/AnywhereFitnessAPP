@@ -1,11 +1,12 @@
-endpoints
+# endpoints
 
-HERE IS THE API BASE URL
+# HERE IS THE API BASE URL
+
 https://anywherefitnessapis.herokuapp.com/
 
-endpoints for Auth "Register/Login"
+# endpoints for Auth "Register/Login"
 
-REGISTER USER INFO TO DATABASE
+# REGISTER USER INFO TO DATABASE
 
 https://anywherefitnessapis.herokuapp.com/api/v1/auth/register
 
@@ -35,7 +36,8 @@ role:"Instructor or Client roles Only"
   "role": "Instructor"
   }
   }
-  LOGIN USER INFO TO DATABASE
+
+# LOGIN USER INFO TO DATABASE
 
 https://anywherefitnessapis.herokuapp.com/api/v1/auth/login
 
@@ -54,7 +56,7 @@ role: "Instructor or Client roles Only"
 "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2Mjk5NTEyNDMsImV4cCI6MTYyOTk1MTI3M30.fL0Po1gd1nExBwiNcYlVWhJKBUmNzTAqUxYfxve5IoI"
 }
 
-GET ALL USERS
+# GET ALL USERS
 
 https://anywherefitnessapis.herokuapp.com/api/v1/user/userinfo
 
@@ -83,7 +85,7 @@ https://anywherefitnessapis.herokuapp.com/api/v1/user/userinfo
   "role": "Instructor or Client"
   }
 
-GET USER BY ID
+# GET USER BY ID
 
 https://anywherefitnessapis.herokuapp.com/api/v1/user/userinfo/:id
 
@@ -105,7 +107,7 @@ https://anywherefitnessapis.herokuapp.com/api/v1/user/userinfo/:id
   "role": "Instructor or Client"
   },
 
-UPDATE USER BY ID
+# UPDATE USER BY ID
 
 https://anywherefitnessapis.herokuapp.com/api/v1/user/userinfo/:id
 
@@ -127,7 +129,7 @@ https://anywherefitnessapis.herokuapp.com/api/v1/user/userinfo/:id
   "role": "Instructor or Client"
   },
 
-DELETE USER BY ID
+# DELETE USER BY ID
 
 https://anywherefitnessapis.herokuapp.com/api/v1/user/userinfo/:id
 
@@ -140,7 +142,7 @@ https://anywherefitnessapis.herokuapp.com/api/v1/user/userinfo/:id
 "message": "string"
 }
 
-GET ALL CLASSES
+# GET ALL CLASSES
 
 https://anywherefitnessapis.herokuapp.com/api/v1/class/
 
@@ -182,7 +184,7 @@ https://anywherefitnessapis.herokuapp.com/api/v1/class/
 ]
 }
 
-GET CLASS BY ID
+# GET CLASS BY ID
 
 https://anywherefitnessapis.herokuapp.com/api/v1/class/:id
 
@@ -211,7 +213,7 @@ https://anywherefitnessapis.herokuapp.com/api/v1/class/:id
 ]
 }
 
-CREATE CLASS
+# CREATE CLASS
 
 https://anywherefitnessapis.herokuapp.com/api/v1/class/
 
@@ -254,7 +256,7 @@ https://anywherefitnessapis.herokuapp.com/api/v1/class/
 ]
 }
 
-UPDATE CLASS
+# UPDATE CLASS
 
 https://anywherefitnessapis.herokuapp.com/api/v1/class/:id
 
@@ -299,7 +301,7 @@ https://anywherefitnessapis.herokuapp.com/api/v1/class/:id
 ]
 }
 
-DELETE CLASS
+# DELETE CLASS
 
 https://anywherefitnessapis.herokuapp.com/api/v1/class/:id
 
@@ -326,7 +328,7 @@ https://anywherefitnessapis.herokuapp.com/api/v1/class/:id
 "message": "string"
 }
 
-Get all Client List
+# Get all Client List
 
 https://anywherefitnessapis.herokuapp.com/api/v1/clientList/
 
@@ -366,7 +368,7 @@ https://anywherefitnessapis.herokuapp.com/api/v1/clientlist/:id
 ]
 }
 
-CREATE CLIENT LISTS
+# CREATE CLIENT LISTS
 
 https://anywherefitnessapis.herokuapp.com/api/v1/clientlist/
 
@@ -415,7 +417,7 @@ provide a usersId:"number"
 ]
 }
 
-UPDATE CLASS
+# UPDATE CLASS
 
 https://anywherefitnessapis.herokuapp.com/api/v1/clientlist/:id
 
@@ -495,7 +497,7 @@ https://anywherefitnessapis.herokuapp.com/api/v1/class/:id
 "message": "string"
 }
 
-SEARCH BAR
+# SEARCH BAR
 
 https://anywherefitnessapis.herokuapp.com/api/v1/search/instructorusername
 
