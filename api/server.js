@@ -1,29 +1,35 @@
-const express = require('express')
-const helmet = require('helmet')
-const cors = require('cors')
-const db = require('./data/db-config')
+const express = require("express");
+const helmet = require("helmet");
+const cors = require("cors");
 
-function getAllUsers() { return db('users') }
+const server = express();
+server.use(express.json());
+server.use(helmet());
+server.use(cors());
 
-async function insertUser(user) {
-  // WITH POSTGRES WE CAN PASS A "RETURNING ARRAY" AS 2ND ARGUMENT TO knex.insert/update
-  // AND OBTAIN WHATEVER COLUMNS WE NEED FROM THE NEWLY CREATED/UPDATED RECORD
-  // UNLIKE SQLITE WHICH FORCES US DO DO A 2ND DB CALL
-  const [newUserObject] = await db('users').insert(user, ['user_id', 'username', 'password'])
-  return newUserObject // { user_id: 7, username: 'foo', password: 'xxxxxxx' }
-}
+const authRouter = require("./auth/auth-router");
+const userRouter = require("./user/user-router");
+const searchRouter = require("./search/search-router");
+const classRouter = require("./class/class-router");
+const clientListRouter = require("./clientList/clientList-router");
 
-const server = express()
-server.use(express.json())
-server.use(helmet())
-server.use(cors())
+server.use("/api/v1/class", classRouter);
+server.use("/api/v1/search", searchRouter);
+server.use("/api/v1/auth", authRouter);
+server.use("/api/v1/user", userRouter);
+server.use("/api/v1/clientlist", clientListRouter);
 
-server.get('/api/users', async (req, res) => {
-  res.json(await getAllUsers())
-})
+// ERROR HANDLING MIDDLEWARE
+server.use("*", (req, res) => {
+	res.status(500).json({
+		message: "Something Went wrong in the Server",
+	});
+});
+server.use((err, req, res) => {
+	res.status(err.status || 500).json({
+		message: err.message,
+		stack: err.stack,
+	});
+});
 
-server.post('/api/users', async (req, res) => {
-  res.status(201).json(await insertUser(req.body))
-})
-
-module.exports = server
+module.exports = server;
