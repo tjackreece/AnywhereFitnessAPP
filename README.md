@@ -58,3 +58,24 @@ The following tutorial explains how to set up this project using PostgreSQL and 
 - If you want to edit a migration that has already been released but don't want to lose all the data, make a new migration instead. This is a more realistic flow for production apps: prod databases are never migrated down. We can migrate Heroku down freely only because there's no valuable data from customers in it. In this sense, Heroku is acting more like a staging environment than production.
 
 - If your fronted devs are interested in running the API locally, help them set up PostgreSQL & pgAdmin in their machines, and teach them how to run migrations in their local. This empowers them to (1) help you troubleshoot bugs, (2) obtain the latest code by simply doing `git pull` and (3) work with their own data, without it being wiped every time you roll back the Heroku db. Collaboration is more fun and direct, and you don't need to deploy as often.
+
+// server.get("/api/users", async (req, res) => {
+// res.json(await getAllUsers());
+// });
+
+// server.post("/api/users", async (req, res) => {
+// res.status(201).json(await insertUser(req.body));
+// });
+
+// function getAllUsers() {
+// return db("users");
+// }
+
+// async function insertUser(user) {
+// WITH POSTGRES WE CAN PASS A "RETURNING ARRAY" AS 2ND ARGUMENT TO knex.insert/update
+// AND OBTAIN WHATEVER COLUMNS WE NEED FROM THE NEWLY CREATED/UPDATED RECORD
+// UNLIKE SQLITE WHICH FORCES US DO DO A 2ND DB CALL
+// const [newUserObject] = await db('users').insert(user, ['user_id', 'username', 'password'])
+// return newUserObject
+// { user_id: 7, username: 'foo', password: 'xxxxxxx' }
+// }

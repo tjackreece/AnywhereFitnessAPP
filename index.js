@@ -1,9 +1,12 @@
-require('dotenv').config()
+require("dotenv").config();
+const server = require("./api/server");
 
-const server = require('./api/server')
+const { PORT, NODE_ENV } = require("./config/config");
 
-const port = process.env.PORT
-
-server.listen(port, () => {
-  console.log('listening on ' + port)
-})
+if (NODE_ENV === "development") {
+	const cors = require("cors");
+	server.use(cors());
+}
+server.listen(PORT, () => {
+	console.log(` listening on PORT ${PORT}`);
+});
