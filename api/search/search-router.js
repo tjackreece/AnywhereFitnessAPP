@@ -1,6 +1,5 @@
 const server = require("express").Router();
 const searchModel = require("./search-model");
-const db = require("../data/db-config");
 
 server.post("/classname", (req, res, next) => {
 	const { searchItem } = req.body;
@@ -131,10 +130,10 @@ server.post("/clientfirstname", (req, res, next) => {
 				});
 			}
 			// console.log(searchResult);
+		})
+		.catch((error) => {
+			next(error);
 		});
-	// .catch((error) => {
-	// 	next(error);
-	// });
 });
 server.post("/time", (req, res, next) => {
 	const { searchItem } = req.body;

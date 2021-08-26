@@ -1,6 +1,5 @@
 const jwt = require("jsonwebtoken");
 const { JWT_SECRET } = require("../../config/config");
-const userModel = require("../user/user-model");
 const db = require("../data/db-config");
 const restricted = (req, res, next) => {
 	const token = req.headers.authorization;
@@ -26,7 +25,7 @@ const only = (role_name) => (req, res, next) => {
 	}
 };
 const checkUserExists = async (req, res, next) => {
-	const { username, password, role } = req.body;
+	const { username } = req.body;
 
 	const member = await db("userInfo as u").where("u.username", username);
 	const user = member[0];

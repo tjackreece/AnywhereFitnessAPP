@@ -1,7 +1,4 @@
 const db = require("../data/db-config");
-classModel = require("../class/class-model");
-clientListModel = require("../clientList/clientList-model");
-userModel = require("../user/user-model");
 
 async function searchDatabaseByClassName(searchItem) {
 	const SearchResult = await db("class").where(
@@ -113,6 +110,7 @@ async function searchDatabaseByClientFirstname(searchItem) {
 		const Role = SearchResult[0].role;
 
 		if (SearchResult === undefined) {
+			console.log("fix me later");
 		} else if (SearchCount === 0) {
 			return null;
 		} else if (Role === undefined) {

@@ -25,7 +25,7 @@ server.use("*", (req, res) => {
 		message: "Something Went wrong in the Server",
 	});
 });
-server.use((err, req, res, next) => {
+server.use((err, req, res) => {
 	res.status(err.status || 500).json({
 		message: err.message,
 		stack: err.stack,
