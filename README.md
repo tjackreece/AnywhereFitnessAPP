@@ -1,81 +1,499 @@
-# Build Week Scaffolding for Node and PostgreSQL
+<!-- endpoints -->
 
-## Video Tutorial
+HERE IS THE API BASE URL
+https://anywherefitnessapis.herokuapp.com/
 
-The following tutorial explains how to set up this project using PostgreSQL and Heroku.
+<!-- endpoints for Auth "Register/Login" -->
+<!--  -->
+<!--  -->
+<!--  -->
+<!--  -->
+<!-- REGISTER USER INFO TO DATABASE -->
 
-[![Setting up PostgreSQL for Build Week](https://img.youtube.com/vi/kTO_tf4L23I/maxresdefault.jpg)](https://www.youtube.com/watch?v=kTO_tf4L23I)
+https://anywherefitnessapis.herokuapp.com/api/v1/auth/register
 
-## Requirements
+# Please send the data in this form in this format:
 
-- [PostgreSQL, pgAdmin 4](https://www.postgresql.org/download/) and [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli) installed in your local machine.
-- A Heroku app with the [Heroku PostgreSQL Addon](https://devcenter.heroku.com/articles/heroku-postgresql#provisioning-heroku-postgres) added to it.
-- Development and testing databases created with [pgAdmin 4](https://www.pgadmin.org/docs/pgadmin4/4.29/database_dialog.html).
+{
+first_name:"string",
+last_name:"string",
+email:"string that includes "@" ",
+username:"string",
+password:"string",
+role:"Instructor or Client roles Only"
+}
 
-## Starting a New Project
+# Response
 
-- Create a new repository using this template, and clone it to your local.
-- Create a `.env` file and follow the instructions inside `knexfile.js`.
-- Fix the scripts inside `package.json` to use your Heroku app.
+- {
+  "code": 100,
+  "message": "Welcome to your new gym Random1, Allow us to show you all your Client features",
+  "NewUserLogin": {
+  "userID": 11,
+  "first_name": "Random1",
+  "last_name": "Person52",
+  "email": "RP25@gmail.com",
+  "username": "Random123456",
+  "password": "$2a$10$HRSynco4twC4BVDzq0Z/Sew8TDjFWKRjAOCr85Tmso1KrvJGXbAeW",
+  "role": "Instructor"
+  }
+  }
+  <!-- LOGIN USER INFO TO DATABASE -->
 
-## Scripts
+https://anywherefitnessapis.herokuapp.com/api/v1/auth/login
 
-- **start**: Runs the app in production.
-- **server**: Runs the app in development.
-- **migrate**: Migrates the local development database to the latest.
-- **rollback**: Rolls back migrations in the local development database.
-- **seed**: Truncates all tables in the local development database, feel free to add more seed files.
-- **test**: Runs tests.
-- **deploy**: Deploys the main branch to Heroku.
+# Please send the data in this form in this format:
 
-**The following scripts NEED TO BE EDITED before using: replace `YOUR_HEROKU_APP_NAME`**
+{
+username:"string",
+password:"string",
+role: "Instructor or Client roles Only"
+}
 
-- **migrateh**: Migrates the Heroku database to the latest.
-- **rollbackh**: Rolls back migrations in the Heroku database.
-- **databaseh**: Interact with the Heroku database from the command line using psql.
-- **seedh**: Runs all seeds in the Heroku database.
+# Response if Credentialls are Correct
 
-## Hot Tips
+{
+"message": "Welcome back Jamie, Here is your AccessToken",
+"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2Mjk5NTEyNDMsImV4cCI6MTYyOTk1MTI3M30.fL0Po1gd1nExBwiNcYlVWhJKBUmNzTAqUxYfxve5IoI"
+}
 
-- Figure out the connection to the database and deployment before writing any code.
+<!-- GET ALL USERS -->
 
-- If you need to make changes to a migration file that has already been released to Heroku, follow this sequence:
+https://anywherefitnessapis.herokuapp.com/api/v1/user/userinfo
 
-  1. Roll back migrations in the Heroku database
-  2. Deploy the latest code to Heroku
-  3. Migrate the Heroku database to the latest
+# Response
 
-- If your frontend devs are clear on the shape of the data they need, you can quickly build provisional endpoints that return mock data. They shouldn't have to wait for you to build the entire backend.
+- {
+  "Status": "Success",
+  "Member_Count": 2,
+  "Members_Info": [
+  {
+  "userID": number,
+  "first_name": "string",
+  "last_name": "string",
+  "email": "string that includes "@"@gmail.com",
+  "username": "string",
+  "password": "hashpassword",
+  "role": "Instructor or Client"
+  },
+  {
+  "userID": number,
+  "first_name": "string",
+  "last_name": "string",
+  "email": "string that includes "@"@gmail.com",
+  "username": "string",
+  "password": "hashpassword",
+  "role": "Instructor or Client"
+  }
 
-- Keep your endpoints super lean: the bulk of the code belongs inside models and other middlewares.
+<!-- GET USER BY ID -->
 
-- Validating and sanitizing client data using a library is much less work than doing it manually.
+https://anywherefitnessapis.herokuapp.com/api/v1/user/userinfo/:id
 
-- Revealing crash messages to clients is a security risk, but during development it's helpful if your frontend devs are able to tell you what crashed.
+# Please replace ":id" with a Number or "userId" whom you are looking for. params takes in params
 
-- PostgreSQL comes with [fantastic built-in functions](https://hashrocket.com/blog/posts/faster-json-generation-with-postgresql) for hammering rows into whatever JSON shape.
+# Response
 
-- If you want to edit a migration that has already been released but don't want to lose all the data, make a new migration instead. This is a more realistic flow for production apps: prod databases are never migrated down. We can migrate Heroku down freely only because there's no valuable data from customers in it. In this sense, Heroku is acting more like a staging environment than production.
+- {
+  "Status": "Success",
+  "Member_Count": 1,
+  "Members_Info": [
+  {
+  "userID": number,
+  "first_name": "string",
+  "last_name": "string",
+  "email": "string that includes "@"@gmail.com",
+  "username": "string",
+  "password": "hashpassword",
+  "role": "Instructor or Client"
+  },
 
-- If your fronted devs are interested in running the API locally, help them set up PostgreSQL & pgAdmin in their machines, and teach them how to run migrations in their local. This empowers them to (1) help you troubleshoot bugs, (2) obtain the latest code by simply doing `git pull` and (3) work with their own data, without it being wiped every time you roll back the Heroku db. Collaboration is more fun and direct, and you don't need to deploy as often.
+<!-- UPDATE USER BY ID -->
 
-// server.get("/api/users", async (req, res) => {
-// res.json(await getAllUsers());
-// });
+https://anywherefitnessapis.herokuapp.com/api/v1/user/userinfo/:id
 
-// server.post("/api/users", async (req, res) => {
-// res.status(201).json(await insertUser(req.body));
-// });
+# Please replace ":id" with a Number or "userId" whom you are looking to update. params takes in params
 
-// function getAllUsers() {
-// return db("users");
-// }
+# Response
 
-// async function insertUser(user) {
-// WITH POSTGRES WE CAN PASS A "RETURNING ARRAY" AS 2ND ARGUMENT TO knex.insert/update
-// AND OBTAIN WHATEVER COLUMNS WE NEED FROM THE NEWLY CREATED/UPDATED RECORD
-// UNLIKE SQLITE WHICH FORCES US DO DO A 2ND DB CALL
-// const [newUserObject] = await db('users').insert(user, ['user_id', 'username', 'password'])
-// return newUserObject
-// { user_id: 7, username: 'foo', password: 'xxxxxxx' }
-// }
+- {
+  "Status": "Success",
+  "Member_Count": 1,
+  "Members_Info": [
+  {
+  "userID": number,
+  "first_name": "string",
+  "last_name": "string",
+  "email": "string that includes "@"@gmail.com",
+  "username": "string",
+  "password": "hashpassword",
+  "role": "Instructor or Client"
+  },
+
+<!-- DELETE USER BY ID -->
+
+https://anywherefitnessapis.herokuapp.com/api/v1/user/userinfo/:id
+
+# Please replace ":id" with a Number or "userId" whom you are looking to DELETE. params takes in params
+
+# Response
+
+{
+"deleteStatus": "string",
+"message": "string"
+}
+
+<!-- GET ALL CLASSES -->
+
+https://anywherefitnessapis.herokuapp.com/api/v1/class/
+
+# Response
+
+{
+"classCount": 2,
+"allClasses": [
+{
+"classId": 1,
+"class_name": "Running The Block",
+"class_time": "12:00",
+"class_am_or_pm": "pm",
+"class_date": "2021-26-08",
+"class_duration": 90,
+"class_type": "Cardio",
+"class_intensity_level": "Hard",
+"class_location": "Naples",
+"class_client_list_id": 1,
+"class_description": "You know what it is. time to run the block, hold down my set, get shit started",
+"class_instructor_username": "tjackreece",
+"class_cost": 35
+},
+{
+"classId": 2,
+"class_name": "Running Up a Hill",
+"class_time": "5:00",
+"class_am_or_pm": "AM",
+"class_date": "2021-26-08",
+"class_duration": 120,
+"class_type": "Cardio",
+"class_intensity_level": "Hard",
+"class_location": "Naples",
+"class_client_list_id": 2,
+"class_description": "You know what it is. time to run this, hold down my breakfast",
+"class_instructor_username": "tjackreece",
+"class_cost": 20
+}
+]
+}
+
+<!-- GET CLASS BY ID -->
+
+https://anywherefitnessapis.herokuapp.com/api/v1/class/:id
+
+# Please replace ":id" with a Number or "classId" whisch you are looking for. params takes in params
+
+# Response
+
+{
+"classCount": 1,
+"Class": [
+{
+"classId": 1,
+"class_name": "Running The Block",
+"class_time": "12:00",
+"class_am_or_pm": "pm",
+"class_date": "2021-26-08",
+"class_duration": 90,
+"class_type": "Cardio",
+"class_intensity_level": "Hard",
+"class_location": "Naples",
+"class_client_list_id": 1,
+"class_description": "You know what it is. time to run the block, hold down my set, get shit started",
+"class_instructor_username": "tjackreece",
+"class_cost": 35
+},
+]
+}
+
+<!-- CREATE CLASS -->
+
+https://anywherefitnessapis.herokuapp.com/api/v1/class/
+
+# Please send the data in this form in this format:
+
+{
+"class_name":"Running The Block",
+"class_time":"12:00",
+"class_am_or_pm":"pm",
+"class_date":"2021-26-08",
+"class_duration":90,
+"class_type":"Cardio",
+"class_intensity_level":"Hard",
+"class_location":"Naples",
+"class_description":"You know what it is. time to run the block, hold down my set, get shit started",
+"class_instructor_username":"tjackreece",
+"class_cost":"35"
+}
+
+# Response
+
+{
+"createdClassCount": 1,
+"newClass": [
+{
+"classId": 3,
+"class_name": "Running The Block",
+"class_time": "12:00",
+"class_am_or_pm": "pm",
+"class_date": "2021-26-08",
+"class_duration": 90,
+"class_type": "Cardio",
+"class_intensity_level": "Hard",
+"class_location": "Naples",
+"class_client_list_id": 3,
+"class_description": "You know what it is. time to run the block, hold down my set, get shit started",
+"class_instructor_username": "tjackreece",
+"class_cost": 35
+}
+]
+}
+
+<!-- UPDATE CLASS -->
+
+https://anywherefitnessapis.herokuapp.com/api/v1/class/:id
+
+# Please send the data in this form in this format:
+
+{
+"class_name":"Running The Block",
+"class_time":"12:00",
+"class_am_or_pm":"pm",
+"class_date":"2021-26-08",
+"class_duration":"90",
+"class_type":"Cardio",
+"class_intensity_level":"Hard",
+"class_location":"Naples",
+"class_description":"You know what it is. time to run the block, hold down my set, get shit started",
+"class_instructor_username":"tjackreece",
+"class_cost": "25"
+}
+
+# Response
+
+{
+"Code": 201,
+"UpdatedStatus": "Class Updated Successfully",
+"UpdatedClassCount": 1,
+"UpdatedClass": [
+{
+"classId": 1,
+"class_name": "Running The Block",
+"class_time": "12:00",
+"class_am_or_pm": "pm",
+"class_date": "2021-26-08",
+"class_duration": 90,
+"class_type": "Cardio",
+"class_intensity_level": "Hard",
+"class_location": "Naples",
+"class_client_list_id": 1,
+"class_description": "You know what it is. time to run the block, hold down my set, get shit started",
+"class_instructor_username": "tjackreece",
+"class_cost": 25
+}
+]
+}
+
+<!-- DELETE CLASS -->
+
+https://anywherefitnessapis.herokuapp.com/api/v1/class/:id
+
+# Please replace ":id" with a Number or "classId" which you are looking to DELETE. params takes in params
+
+{
+"class_name":"Running The Block",
+"class_time":"12:00",
+"class_am_or_pm":"pm",
+"class_date":"2021-26-08",
+"class_duration":"90",
+"class_type":"Cardio",
+"class_intensity_level":"Hard",
+"class_location":"Naples",
+"class_description":"You know what it is. time to run the block, hold down my set, get shit started",
+"class_instructor_username":"tjackreece",
+"class_cost": "25"
+}
+
+# Response
+
+{
+"deleteStatus": "string",
+"message": "string"
+}
+
+<!-- Get all Client List -->
+
+https://anywherefitnessapis.herokuapp.com/api/v1/clientList/
+
+# Response
+
+- {
+  "classListsCount": 12,
+  "allClassLists": [
+  {
+  "client_list_id": 1,
+  "class_id": 1,
+  "usersId": 1
+  },{
+  "client_list_id": 2,
+  "class_id": 1,
+  "usersId": 1
+  }
+  ]
+  }
+
+  <!-- GET CLIENT LISTS BY ID -->
+
+https://anywherefitnessapis.herokuapp.com/api/v1/clientlist/:id
+
+# Please replace ":id" with a Number or "client_list_id" whisch you are looking for. params takes in params
+
+# Response
+
+{
+"classListCount": 1,
+"ClassList": [
+{
+"client_list_id": 1,
+"class_id": 1,
+"usersId": 1
+}
+]
+}
+
+<!-- CREATE CLIENT LISTS -->
+
+https://anywherefitnessapis.herokuapp.com/api/v1/clientlist/
+
+# Please send the data in this form in this format:
+
+Provide "classId": "number"
+
+provide a usersId:"number"
+
+{
+"class_id":number,
+"usersId":number
+}
+
+# Response
+
+{
+"message": "Client added in class successfully",
+"ClassInfo": {
+"ClassID": 1,
+"Classname": "Running The Block",
+"ClassTime": "12:00 pm",
+"ClassDate": "2021-26-08",
+"Location": "Naples",
+"Cost": 25
+},
+"MemberInfo": {
+"UserID": 1,
+"Name": "Timothy Jackreece",
+"Email": "tjackreece1@gmail.com",
+"Username": "tjackreece",
+"Role": "Instructor"
+},
+"InstructorInfo": {
+"Firstname": "Timothy",
+"Lastname": "Jackreece",
+"Email": "tjackreece1@gmail.com",
+"Ussername": "tjackreece"
+},
+"FoundClientList": [
+{
+"client_list_id": 10,
+"class_id": 1,
+"usersId": 1
+}
+]
+}
+
+<!-- UPDATE CLASS -->
+
+https://anywherefitnessapis.herokuapp.com/api/v1/clientlist/:id
+
+# Please replace ":id" with a Number or "client_list_id" whisch you are looking for. params takes in params
+
+# Please send the data in this form in this format:
+
+# Please send the data in this form in this format:
+
+Provide "classId": "number"
+
+provide a usersId:"number"
+
+{
+"class_id":number,
+"usersId":number
+}
+
+# Response
+
+{
+"message": "Client has been updated in database successfully",
+"ClassInfo": {
+"ClassID": 2,
+"Classname": "Running Up a Hill",
+"ClassTime": "5:00 AM",
+"ClassDate": "2021-26-08",
+"Location": "Naples",
+"Cost": 20
+},
+"MemberInfo": {
+"UserID": 5,
+"Name": "James Terude",
+"Email": "jamesT@gmail.com",
+"Username": "jTdoYouLoveMe",
+"Role": "Client"
+},
+"InstructorInfo": {
+"Firstname": "Timothy",
+"Lastname": "Jackreece",
+"Email": "tjackreece1@gmail.com",
+"Ussername": "tjackreece"
+},
+"FoundClientList": [
+{
+"client_list_id": 1,
+"class_id": 2,
+"usersId": 5
+}
+]
+}
+
+<!-- DELETE CLASS -->
+
+https://anywherefitnessapis.herokuapp.com/api/v1/class/:id
+
+# Please replace ":id" with a Number or "classId" which you are looking to DELETE. params takes in params
+
+{
+"class_name":"Running The Block",
+"class_time":"12:00",
+"class_am_or_pm":"pm",
+"class_date":"2021-26-08",
+"class_duration":"90",
+"class_type":"Cardio",
+"class_intensity_level":"Hard",
+"class_location":"Naples",
+"class_description":"You know what it is. time to run the block, hold down my set, get shit started",
+"class_instructor_username":"tjackreece",
+"class_cost": "25"
+}
+
+# Response
+
+{
+"deleteStatus": "string",
+"message": "string"
+}

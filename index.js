@@ -1,4 +1,5 @@
 require("dotenv").config();
+
 const server = require("./api/server");
 
 const { PORT, NODE_ENV } = require("./config/config");
