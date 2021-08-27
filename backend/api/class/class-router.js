@@ -34,7 +34,6 @@ server.get("/:id", (req, res, next) => {
 		.catch((error) => next(error));
 });
 // Get a List of Classes Instructor Created
-server.post;
 // Create Class
 server.post("/", (req, res, next) => {
 	const {

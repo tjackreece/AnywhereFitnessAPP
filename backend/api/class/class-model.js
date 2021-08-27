@@ -60,11 +60,14 @@ async function deleteClass(id) {
 		return successMessage;
 	}
 }
+// get class list by client
+function getClassesClientRegistered() {}
 
 module.exports = {
 	findClassByIdforClientList,
 	getClasses,
 	findClassById,
+	getClassesClientRegistered,
 	addClass,
 	updateClass,
 	deleteClass,
