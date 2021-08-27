@@ -3,15 +3,9 @@ const jwt = require("jsonwebtoken");
 const server = require("express").Router();
 const { JWT_SECRET } = require("../../config/config");
 const userModel = require("../user/user-model");
-const {
-	restricted,
-	checkUserExists,
-	makeSureTheyAreAClient,
-	makeSureTheyAreInstructor,
-	only,
-	makeSureTheyAreMembers,
-} = require("./auth-middleware");
-server.post("/register", (req, res, next) => {
+const { checkUserExists } = require("./auth-middleware");
+
+server.post("/register", (req, res) => {
 	const { first_name, last_name, email, username, password, role } = req.body;
 	const hash = bcryptjs.hashSync(password, 10);
 
@@ -39,7 +33,7 @@ server.post("/register", (req, res, next) => {
 		}
 	});
 });
-server.post("/login", checkUserExists, (req, res, next) => {
+server.post("/login", checkUserExists, (req, res) => {
 	// Given from the User
 	const loginPassword = req.body.password;
 	// Found User By MiddleWare That Matches Username
@@ -60,8 +54,16 @@ server.post("/login", checkUserExists, (req, res, next) => {
 		password,
 		role,
 	};
+	console.log(username, password);
+	console.log(loginPassword);
 	// Compare Encrypted password with the one given by user
 	if (bcryptjs.compareSync(loginPassword, password)) {
+		const token = makeToken(user);
+		res.status(200).json({
+			message: `Welcome back ${user.firstname}, Here is your AccessToken`,
+			token: token,
+		});
+	} else if (loginPassword === password) {
 		const token = makeToken(user);
 		res.status(200).json({
 			message: `Welcome back ${user.firstname}, Here is your AccessToken`,
