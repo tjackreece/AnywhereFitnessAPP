@@ -9,6 +9,7 @@ function getClientListById(id) {
 	return db("clientList as c").where("c.client_list_id", id);
 }
 // Get Client list for instructor
+// Get Client list for Client
 
 // ADD  Client LISTS
 async function createClientList(newClass) {
