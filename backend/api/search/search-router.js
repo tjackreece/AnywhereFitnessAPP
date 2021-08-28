@@ -177,6 +177,8 @@ server.post("/location", (req, res, next) => {
 			next(error);
 		});
 });
+// something new to push
+
 server.post("/type", (req, res, next) => {
 	const { searchItem } = req.body;
 	searchModel
