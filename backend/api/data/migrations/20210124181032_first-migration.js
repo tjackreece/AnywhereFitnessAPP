@@ -19,6 +19,10 @@ exports.up = async (knex) => {
 			classes.string("class_type", 200).notNullable();
 			classes.string("class_intensity_level", 200).notNullable();
 			classes.string("class_location", 200).notNullable();
+			classes.string("class_address", 200).notNullable();
+			classes.decimal("address_cordinates_lat").notNullable();
+			classes.decimal("address_cordinates_lng").notNullable();
+			classes.integer("max_class_size").notNullable();
 			classes.increments("class_client_list_id", { primaryKey: false });
 			classes.string("class_description", 200).notNullable();
 			classes.string("class_instructor_username", 200).notNullable();

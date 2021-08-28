@@ -5,6 +5,7 @@ function getClasses() {
 	const classes = db("class");
 	return classes;
 }
+
 function findClassById(id) {
 	const foundClass = db("class as c").where("c.classId", id);
 	return foundClass;

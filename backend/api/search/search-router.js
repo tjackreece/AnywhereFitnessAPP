@@ -180,7 +180,7 @@ server.post("/location", (req, res, next) => {
 server.post("/type", (req, res, next) => {
 	const { searchItem } = req.body;
 	searchModel
-		.searchDatabaseByIntensityLevel(searchItem)
+		.searchDatabaseByType(searchItem)
 		.then((searchResult) => {
 			const searchResultCount = searchResult.length;
 			if (searchResultCount === 0) {
@@ -193,6 +193,7 @@ server.post("/type", (req, res, next) => {
 					SearchResult: searchResult,
 				});
 			}
+			console.log(searchResult);
 		})
 		.catch((error) => {
 			next(error);
