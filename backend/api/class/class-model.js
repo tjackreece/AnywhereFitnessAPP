@@ -5,6 +5,7 @@ function getClasses() {
 	const classes = db("class");
 	return classes;
 }
+
 function findClassById(id) {
 	const foundClass = db("class as c").where("c.classId", id);
 	return foundClass;
@@ -60,11 +61,14 @@ async function deleteClass(id) {
 		return successMessage;
 	}
 }
+// get class list by client
+function getClassesClientRegistered() {}
 
 module.exports = {
 	findClassByIdforClientList,
 	getClasses,
 	findClassById,
+	getClassesClientRegistered,
 	addClass,
 	updateClass,
 	deleteClass,

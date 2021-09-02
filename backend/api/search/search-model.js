@@ -41,11 +41,7 @@ async function searchDatabaseByLocation(searchItem) {
 	return SearchResult;
 }
 async function searchDatabaseByType(searchItem) {
-	const SearchResult = await db("class").where(
-		db.raw('LOWER("class_type")'),
-		"like",
-		`%${searchItem}%`
-	);
+	const SearchResult = await db("class").where("class_type", `${searchItem}`);
 	return SearchResult;
 }
 async function searchDatabaseByIntensityLevel(searchItem) {

@@ -14,6 +14,10 @@ exports.seed = function (knex) {
 					class_type: "Cardio",
 					class_intensity_level: "Hard",
 					class_location: "Naples",
+					class_address: "101 apple street",
+					address_cordinates_lat: 40.412222231,
+					address_cordinates_lng: 41.23123412,
+					max_class_size: 25,
 					class_description:
 						"You know what it is. time to run the block, hold down my set, get shit started",
 					class_instructor_username: "tjackreece",
@@ -26,8 +30,12 @@ exports.seed = function (knex) {
 					class_date: "2021-26-08",
 					class_duration: 120,
 					class_type: "Cardio",
+					class_address: "101 apple street",
+					address_cordinates_lat: 40.412222231,
+					address_cordinates_lng: 41.23123412,
 					class_intensity_level: "Hard",
 					class_location: "Naples",
+					max_class_size: 25,
 					class_description:
 						"You know what it is. time to run this, hold down my breakfast",
 					class_instructor_username: "tjackreece",
