@@ -3,17 +3,19 @@ const searchModel = require("./search-model");
 
 server.post("/classname", (req, res, next) => {
 	const { searchItem } = req.body;
+	const lowerCaseSearchItem = searchItem.toLowerCase();
 
 	searchModel
-		.searchDatabaseByClassName(searchItem)
+		.searchDatabaseByClassName(lowerCaseSearchItem)
 		.then((searchResult) => {
 			const searchResultCount = searchResult.length;
 			if (searchResultCount === 0) {
 				res
 					.status(202)
-					.json({ message: `No items found by Name ${searchItem}` });
+					.json({ code: 101, message: `No items found by Name ${searchItem}` });
 			} else {
 				res.status(200).json({
+					code: 201,
 					message: `Found ${searchItem}`,
 					SearchResult: searchResult,
 				});
